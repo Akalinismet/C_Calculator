@@ -4,9 +4,9 @@
 int main(void)
 {
 
-	int secim = 0;
-	int number1 = 0;
-	int number2 = 0;
+	int secim = 0; //Kullanýcýnýn menüden sectigi islem
+	int number1 = 0; //Kullanýcý'dan alýnan birinci sayi
+	int number2 = 0; //Kullanýcý'dan alýnan ikinci sayi
 
 	printf("Welcome To Basic Calculator By Ismet Akalin\n\n");
 
@@ -18,10 +18,10 @@ int main(void)
 		printf("Division       => 4 (number1 / number2)\n");
 		printf("Modulus        => 5 (number1 %% number2)\n");
 		printf("Exponentiation => 6 ( number1^number2 )\n");
-		printf("Square root    => 7 (number1^-1 & number2^-1)\n");
+		printf("Square root    => 7 (number1^(1/2) & number2^(1/2))\n");
 		printf("Exit           => 8\n\n");
 
-		printf("Your Prefer: ");
+		printf("Your Choice: ");
 		scanf_s("%d", &secim);
 
 		if (secim >= 1 && secim <= 8)
@@ -34,55 +34,71 @@ int main(void)
 
 			 if (secim == 1)
 			 {
-				 int sonuc;
-				 sonuc = number1 + number2;
+				 int sonuc = number1 + number2;
 
 				 printf("\nAddition Result: %d\n", sonuc);
 			 }
 			 else if (secim == 2)
 			 {
-				 int sonuc;
-				 sonuc = number1 - number2;
+				 int sonuc = number1 - number2;
 
 				 printf("\nSubtraction Result: %d\n", sonuc);
 			 }
 			 else if (secim == 3)
 			 {
-				 int sonuc;
-				 sonuc = number1 * number2;
+				 int sonuc = number1 * number2;
 
 				 printf("\nMultiplication Result: %d\n", sonuc);
 			 }
 			 else if (secim == 4)
-			 {
-				 int sonuc;
-				 sonuc = number1 / number2;
+			 {	
+				 if (number2 == 0)
+				 {
+					 printf("\nERROR(/0): Your Second Number Must be Diffrent to 0 (Zero)\n");
+				 }
+				 else
+				 {
+					 double sonucdiv = ((double) number1) / ((double) number2);
 
-				 printf("\nDivision Result: %d\n", sonuc);
+					 printf("\nDivision Result: %.2lf\n", sonucdiv);
+				 }
 
 			 }
 			 else if (secim == 5)
 			 {
-				 int sonuc;
-				 sonuc = number1 % (number2);
+				 if (number2 == 0)
+				 {
+					 printf("\nERROR(%%0): Your Second Number Must be Diffrent to 0 (Zero)\n");
+				 }
+				 else
+				 {
+					 int sonuc = number1 % (number2);
 
-				 printf("\nModulus Result: %d\n", sonuc);
+					 printf("\nModulus Result: %d\n", sonuc);
+				 }
+				 
 			 }
 			 else if (secim == 6)
 			 {
-				 int sonuc;
-				 sonuc = pow(number1, number2);
+				 double sonucpow = pow((double) number1, (double) number2);
 
-				 printf("\nExponentiation Result: %d\n", sonuc);
+				 printf("\nExponentiation Result: %.2lf\n", sonucpow);
 			}
 			 else if (secim == 7)
 			 {
-				 int sonuc1;
-				 int sonuc2;
-				 sonuc1 = sqrt(number1);
-				 sonuc2 = sqrt(number2);
+				 if (number1 >= 0 && number2 >= 0)
+				 {
 
-				 printf("\nSquare root Results (1&2): %d & %d\n", sonuc1, sonuc2);
+					double sonuc1 = sqrt((double) number1);
+					double sonuc2 = sqrt((double) number2);
+
+					printf("\nSquare root Results (1&2): %.2lf & %.2lf\n", sonuc1, sonuc2);
+				 
+				 }
+				 else
+				 {
+					printf("\nERROR(>0): Your Numbers Must be Greater Than or Equal to 0 (Zero) for Square Root\n");
+				 }
 			 }
 			
 			else
