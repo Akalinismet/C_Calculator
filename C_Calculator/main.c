@@ -5,8 +5,8 @@ int main(void)
 {
 
 	int secim = 0;
-	int number1;
-	int number2;
+	int number1 = 0;
+	int number2 = 0;
 
 	printf("Welcome To Basic Calculator By Ismet Akalin\n\n");
 
