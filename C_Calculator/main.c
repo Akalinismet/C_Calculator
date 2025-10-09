@@ -3,7 +3,7 @@
 
 int main(void)
 {
-	// Değişken Tanımlamaları
+	
 	int secim = 0;   // Kullanıcının menüden seçtiği işlem numarası
 	int number1 = 0; // Kullanıcıdan alınan birinci sayı
 	int number2 = 0; // Kullanıcıdan alınan ikinci sayı
@@ -26,7 +26,6 @@ int main(void)
 		printf("Your Choice: ");
 		scanf_s("%d", &secim);
 
-		// HOCANIZIN ÖNERDİĞİ YAPI BURADA BAŞLIYOR: 1-7 (İşlemler), 8 (Çıkış), Diğerleri (Hata)
 
 		// 1. Ana İşlemler: Seçim 1 ile 7 Arasında mı? (Sayı Girişi ve Hesaplama Bloğu)
 		if (secim >= 1 && secim <= 7)
