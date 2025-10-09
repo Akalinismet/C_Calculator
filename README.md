@@ -1,5 +1,5 @@
 # CCalculator
-C dili İle yazdığım konsol ekranında kullanılabilen bir hesap makinesi uygulaması (CCalculator Release 0.0.2 (2025-10-08 PM))
+C dili İle yazdığım konsol ekranında kullanılabilen bir hesap makinesi uygulaması (CCalculator Release 0.0.3 (2025-10-09 AM))
 
 # New Features (CCalculator Release 0.0.1 (2025-10-08 PM))
 - Basic Arithmetic Operations: Added functions for addition, subtraction, multiplication, and integer division (int/int).
@@ -15,4 +15,9 @@ Error Handling and Safety
 
 Precision Improvements
 - Decimal Division: Division (Option 4) now calculates results as floating-point numbers (double) and displays them with two decimal places (%.2lf).
-- Mathematical Function Corrections: The results of exponentiation (pow()) and square root (sqrt()) are now correctly handled as double according to the C standard. This increases precision, especially for large ----exponents and fractional square roots.
+- Mathematical Function Corrections: The results of exponentiation (pow()) and square root (sqrt()) are now correctly handled as double according to the C standard. This increases precision, especially for large ---- exponents and fractional square roots.
+
+# New Features (CCalculator Release 0.0.3 (2025-10-09 AM))
+- Simplified Control Flow: Nested and repetitive if statements have been removed. The code now features a cleaner structure with three main blocks: operations 1–7, option 8 for exit, and an invalid input handler.
+- Special Input for Square Root: The square root operation is separated from other binary operations and now accepts only a single number, improving the overall user experience.
+- Comprehensive Commenting: Each part of the code is documented with Turkish comments explaining the variables and logical blocks.
