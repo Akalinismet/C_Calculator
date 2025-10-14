@@ -18,5 +18,8 @@
     <ClCompile Include="main.c">
       <Filter>Kaynak Dosyalar</Filter>
     </ClCompile>
+    <ClCompile Include="Calc-arge.c">
+      <Filter>Üst Bilgi Dosyaları</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

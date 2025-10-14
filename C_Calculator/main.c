@@ -1,3 +1,4 @@
+
 #include <stdio.h> // Temel Giriþ/Çýkýþ iþlemleri (printf, scanf_s) için C Kütüphanesi
 #include <math.h>  // Matematiksel iþlemler (pow, sqrt) için C Kütüphanesi
 
