@@ -1,126 +1,194 @@
+ï»¿#include <stdio.h>
+#include <math.h>
+#include <limits.h>
 
-#include <stdio.h>  // Temel Giriþ/Çýkýþ iþlemleri (printf, scanf_s) için C Kütüphanesi
-#include <math.h>   // Matematiksel iþlemler (pow, sqrt) için C Kütüphanesi
+// --- Function Definitions ---
+
+void print_menu(void)
+{
+    printf("\n[1] Addition       (a + b)\n");
+    printf("[2] Subtraction    (a - b)\n");
+    printf("[3] Multiplication (a * b)\n");
+    printf("[4] Division       (a / b)\n");
+    printf("[5] Power          (a ^ b)\n");
+    printf("[6] Square Root   (sqrt(a))\n");
+    printf("[7] Modulo         (a %% b)\n");
+    printf("[8] Exit\n");
+}
+
+int add(int a, int b)
+{
+    if ((a > 0 && b > INT_MAX - a) || (a < 0 && b < INT_MIN - a)) {
+        printf("ERROR Integer overflow.\n");
+        return 0;
+    }
+    return a + b;
+}
+
+int subtract(int a, int b)
+{
+    if ((b > 0 && a < INT_MIN + b) || (b < 0 && a > INT_MAX + b)) {
+        printf("ERROR Integer overflow.\n");
+        return 0;
+    }
+    return a - b;
+}
+
+int multiply(int a, int b)
+{
+    if (a != 0 && ((b > 0 && (a > INT_MAX / b || a < INT_MIN / b)) ||
+        (b < 0 && (a == INT_MIN && b == -1)))) {
+        printf("ERROR Integer overflow.\n");
+        return 0;
+    }
+    return a * b;
+}
+
+double divide(int a, int b)
+{
+    if (b == 0) {
+        printf("ERROR Division by zero is undefined.\n");
+        return NAN;
+    }
+    return (double)a / (double)b;
+}
+
+double power(int a, int b)
+{
+    if (a == 0 && b == 0) return NAN; // 0^0 hatalÄ± durum
+    double result = pow((double)a, (double)b);
+    if (isinf(result)) {
+        printf("ERROR Overflow in power calculation.\n");
+        return NAN;
+    }
+    return result;
+}
+
+double square_root(int a)
+{
+    if (a < 0) {
+        printf("ERROR Square root of a negative number is undefined.\n");
+        return NAN;
+    }
+    return sqrt((double)a);
+}
+
+int modulo(int a, int b)
+{
+    if (b == 0) {
+        printf("ERROR Modulo by zero is undefined.\n");
+        return INT_MIN;
+    }
+    return a % b;
+}
 
 int main(void)
 {
-	
-	int secim = 0;   // Kullanýcýnýn menüden seçtiði iþlem numarasý
-	int number1 = 0; // Kullanýcýdan alýnan birinci sayý
-	int number2 = 0; // Kullanýcýdan alýnan ikinci sayý
+    int choice = 0;
+    int number1 = 0;
+    int number2 = 0;
+    int scan_status = 0;
 
-	printf("Welcome To Basic Calculator By Ismet Akalin\n\n");
+    printf("Welcome to Basic Calculator\n");
 
-	// Kullanýcý '8' (Çýkýþ) seçeneðini seçene kadar döngüyü devam ettir
-	do {
-		// Ýþlem Menüsünü Ekrana Yazdýrma
-		printf("\nPlease Select Your Calculations;\n");
-		printf("Additon        => 1 (number1 + number2)\n");
-		printf("Subtraction    => 2 (number1 - number2)\n");
-		printf("Multiplication => 3 (number1 x number2)\n");
-		printf("Division       => 4 (number1 / number2)\n");
-		printf("Modulus        => 5 (number1 %% number2)\n"); // %% ile % karakteri yazdýrýlýr
-		printf("Exponentiation => 6 (number1^number2)\n");
-		printf("Square root    => 7 (number1^(1/2))\n");
-		printf("Exit           => 8\n\n");
+    do {
+        print_menu();
 
-		printf("Your Choice: ");
-		scanf_s("%d", &secim);
+        printf("Your choice: ");
+        scan_status = scanf("%d", &choice);
 
+        // Non-numeric veya hatalÄ± giriÅŸ kontrolÃ¼
+        if (scan_status != 1) {
+            printf("ERROR Please Enter Valid Number (1-8)\n");
+            while (getchar() != '\n');  // buffer temizle
+            continue;
+        }
 
-		// 1. Ana Ýþlemler: Seçim 1 ile 7 Arasýnda mý? (Sayý Giriþi ve Hesaplama Bloðu)
-		if (secim >= 1 && secim <= 7)
-		{
-			// Karekök iþlemi (tek sayý) için özel giriþ al
-			if (secim == 7)
-			{
-				printf("\nEnter Your Number for Square Root;\n");
-				printf("Your Number: ");
-				scanf_s("%d", &number1);
-				// number2 bu iþlemde kullanýlmadýðý için alýnmaz.
-			}
-			// Diðer tüm iþlemler (1, 2, 3, 4, 5, 6) için iki sayý giriþi
-			else
-			{
-				printf("\nEnter Your Two Numbers for Calculations;\n");
-				printf("Your Numbers: ");
-				scanf_s("%d %d", &number1, &number2);
-			}
+        if (choice == 8)
+        {
+            printf("GOOD BYE and THANKS\n");
+            printf("(CCalculator Release 0.1.3 (2025 - 10 - 20 AM)), from ISMET AKALIN\n");
+            break;
+        }
 
-			// Seçime göre ilgili iþlemi yap
-			if (secim == 1) // Toplama
-			{
-				int sonuc = number1 + number2;
-				printf("\nAddition Result: %d\n", sonuc);
-			}
-			else if (secim == 2) // Çýkarma
-			{
-				int sonuc = number1 - number2;
-				printf("\nSubtraction Result: %d\n", sonuc);
-			}
-			else if (secim == 3) // Çarpma
-			{
-				int sonuc = number1 * number2;
-				printf("\nMultiplication Result: %d\n", sonuc);
-			}
-			else if (secim == 4) // Bölme
-			{
-				// Sýfýra Bölme Kontrolü
-				if (number2 == 0)
-				{
-					printf("\nERROR(/0): Your Second Number Must be Different to 0 (Zero)\n");
-				}
-				else
-				{
-					// Daha hassas sonuç için double (ondalýklý) dönüþüm yapýlýr
-					double sonucdiv = ((double)number1) / ((double)number2);
-					printf("\nDivision Result: %.2lf\n", sonucdiv);
-				}
-			}
-			else if (secim == 5) // Mod alma
-			{
-				// Sýfýra Mod Alma Kontrolü
-				if (number2 == 0)
-				{
-					printf("\nERROR(%%0): Your Second Number Must be Different to 0 (Zero)\n");
-				}
-				else
-				{
-					int sonuc = number1 % (number2);
-					printf("\nModulus Result: %d\n", sonuc);
-				}
-			}
-			else if (secim == 6) // Üs Alma
-			{
-				double sonucpow = pow((double)number1, (double)number2);
-				printf("\nExponentiation Result: %.2lf\n", sonucpow);
-			}
-			else if (secim == 7) // Karekök Alma
-			{
-				// Karekök için sayýnýn negatif olmamasý gerekir
-				if (number1 >= 0)
-				{
-					double sonuc1 = sqrt((double)number1);
-					printf("\nSquare root Result: %.2lf\n", sonuc1);
-				}
-				else
-				{
-					printf("\nERROR(>0): Your Number Must be Greater Than or Equal to 0 (Zero) for Square Root\n");
-				}
-			}
-		}
-		// 2. Çýkýþ Ýþlemi: Seçim 8 mi?
-		else if (secim == 8)
-		{
-			printf("\n\nGood Bye, Thanks For Your Support\n\n");
-		}
-		// 3. Geçersiz Giriþ: Seçim 1-8 Aralýðý Dýþýnda mý?
-		else
-		{
-			printf("\nPlease Enter Valid Number (1-8)\n");
-		}
+        if (choice >= 1 && choice <= 7)
+        {
+            if (choice == 6) {
+                printf("a: ");
+                if (scanf("%d", &number1) != 1) {
+                    printf("ERROR\n");
+                    while (getchar() != '\n');
+                    continue;
+                }
+            }
+            else {
+                printf("a: ");
+                if (scanf("%d", &number1) != 1) {
+                    printf("ERROR\n");
+                    while (getchar() != '\n');
+                    continue;
+                }
+                printf("b: ");
+                if (scanf("%d", &number2) != 1) {
+                    printf("ERROR\n");
+                    while (getchar() != '\n');
+                    continue;
+                }
+            }
 
-	} while (secim != 8); // secim 8'e eþit olmadýðý sürece döngü devam eder
+            switch (choice)
+            {
+            case 1:
+                printf("Result: %d\n", add(number1, number2));
+                break;
+            case 2:
+                printf("Result: %d\n", subtract(number1, number2));
+                break;
+            case 3:
+                printf("Result: %d\n", multiply(number1, number2));
+                break;
+            case 4:
+            {
+                double result = divide(number1, number2);
+                if (!isnan(result))
+                    printf("Result: %.2f\n", result);
+                break;
+            }
+            case 5:
+            {
+                if (number1 == 0 && number2 == 0)
+                {
+                    printf("ERROR\n");
+                }
+                else {
+                    double result = power(number1, number2);
+                    if (!isnan(result))
+                        printf("Result: %.6f\n", result);
+                    break;
+                }
+            }
+            case 6:
+            {
+                double result = square_root(number1);
+                if (!isnan(result))
+                    printf("Result: %.6f\n", result);
+                break;
+            }
+            case 7:
+            {
+                int result = modulo(number1, number2);
+                if (result != INT_MIN)
+                    printf("Result: %d\n", result);
+                break;
+            }
+            }
+        }
+        else
+        {
+            printf("ERROR Please Enter Valid Number (1-8)\n");
+        }
 
-	return 0;
+    } while (choice != 8);
+
+    return 0;
 }
