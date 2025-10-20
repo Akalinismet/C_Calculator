@@ -1,5 +1,5 @@
 # CCalculator
-C dili İle yazdığım konsol ekranında kullanılabilen bir hesap makinesi uygulaması (CCalculator Release 0.0.3 (2025-10-09 AM))
+C dili İle yazdığım konsol ekranında kullanılabilen bir hesap makinesi uygulaması (CCalculator Release 0.1.3 (2025 - 10 - 20 AM))
 
 # New Features (CCalculator Release 0.0.1 (2025-10-08 PM))
 - Basic Arithmetic Operations: Added functions for addition, subtraction, multiplication, and integer division (int/int).
